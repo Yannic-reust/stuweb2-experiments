@@ -66,48 +66,46 @@ function disconnect() {
 
     <div class="w-full h-screen flex justify-center items-center">
       <div class="h-min">
-        <div class="bg-lightgrey h-min p-8 rounded-3xl mb-4 ">
-         
-          <h1 class="font-roboto text-center bg-gradient-to-r from-orange to-pink bg-clip-text text-h-md" style="color: transparent;">Tic Tac Toe</h1>
+        <div class="bg-lightgrey h-min p-8 rounded-3xl mb-4">
+          <h1
+            class="font-roboto text-center bg-gradient-to-r from-orange to-pink bg-clip-text text-h-md"
+            style="color: transparent"
+          >
+            Tic Tac Toe
+          </h1>
           <!-- <p>{{ player }}</p> -->
         </div>
-        <div class="w-full mt-4 flex justify-center">
-          <input
-         
-         type="text"
-         name="name"
-         id="name"
-        placeholder="Name"
-         className="block w-2/3 h-10 font-roboto rounded-xl border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400  sm:text-sm sm:leading-6"
-       />
-          <button
-            class="bg-lightgrey/80 hover:bg-lightgrey font-roboto text-white font-bold py-2 px-4 w-2/3 rounded-xl"
-            @click="createRoom()"
-          >
-            Create Room 
-          </button>
-        </div>
-        <div class="mt-4 flex items-center flex-col">
-          
-         
-           
-        
-       
-          <input
-         
+        <div class="flex">
+          <div class="mt-2 flex w-1/2 pr-2 items-center flex-col">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Name"
+              className="block w-full h-10 font-roboto rounded-xl border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400  sm:text-sm sm:leading-6"
+            />
+            <button
+              class="bg-lightgrey/80 hover:bg-lightgrey font-roboto text-white font-bold py-2 px-4 w-full mt-2 rounded-xl"
+              @click="createRoom()"
+            >
+              Create Room
+            </button>
+          </div>
+          <div class="mt-2 flex w-1/2 pl-2 items-center flex-col">
+            <input
               type="text"
               name="room-id"
               id="first-name"
-             placeholder="Enter Room ID"
-              className="block w-2/3 h-10 font-roboto rounded-xl border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400  sm:text-sm sm:leading-6"
+              placeholder="Enter Room ID"
+              className="block w-full h-10 font-roboto rounded-xl border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400  sm:text-sm sm:leading-6"
             />
             <button
-            class="bg-lightgrey/80 mt-2 w-2/3 hover:bg-lightgrey font-roboto h-10 text-white font-bold py-2 px-8 rounded-xl"
-            @click="joinRoom()"
-          >
-            Join Room
-          </button>
-         
+              class="bg-lightgrey/80 mt-2 w-full hover:bg-lightgrey font-roboto h-10 text-white font-bold py-2 px-8 rounded-xl"
+              @click="joinRoom()"
+            >
+              Join Room
+            </button>
+          </div>
         </div>
 
         <!-- <div class="grid gap-4 grid-rows-3 grid-cols-3">
