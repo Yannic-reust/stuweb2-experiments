@@ -9,6 +9,7 @@ import TicTacToe from './components/TicTacToe.vue'
 <template>
   <div >
     <TicTacToe />
+
     
   </div>
 </template>
