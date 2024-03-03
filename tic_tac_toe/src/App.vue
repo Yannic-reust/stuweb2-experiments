@@ -1,16 +1,27 @@
 <script setup>
+/*import { io } from "socket.io-client";
 
-import Chat from './components/Chat.vue'
-import TicTacToe from './components/TicTacToe.vue'
+import { onMounted } from "vue";
+
+
+
+let socket = null;
+
+onMounted(() => {
+  console.log("mounted");
+  socket = io("http://localhost:8080");
+  socket.on("game_state", (data) => {
+    console.log("gamestate" + data);
+  });
+});*/
+
 
 
 </script>
 
 <template>
-  <div >
-    <TicTacToe />
-
-    
+  <div>
+    <router-view></router-view>
   </div>
 </template>
 
