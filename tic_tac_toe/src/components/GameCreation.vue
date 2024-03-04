@@ -26,6 +26,7 @@ function createRoom() {
      
     }
     else{
+      store.dispatch("updateWaiting", false);
       console.log("other player joined",data);
     }
   });
@@ -40,6 +41,7 @@ function joinRoom() {
       store.dispatch("updateUser", data.userID);
       store.dispatch("updateRoom", data.roomID);
       store.dispatch("updatePlayer", data.player);
+      store.dispatch("updateWaiting", false);
       router.push(`/${data.roomID}`);
     });
   }
@@ -84,7 +86,7 @@ function joinRoom() {
               v-model="roomID"
               name="name"
               id="name"
-              placeholder="Name"
+              placeholder="Room ID"
               required
               className="block w-full h-10 font-roboto rounded-xl border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400  sm:text-sm sm:leading-6"
             />

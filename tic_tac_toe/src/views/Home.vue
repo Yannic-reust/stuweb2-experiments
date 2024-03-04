@@ -12,7 +12,7 @@ const connected = ref(false);
   <div class="relative bg-darkgrey w-full h-screen flex justify-center">
 
     <!-- buttons -->
-    <div class="absolute top-4 right-4">
+    <!-- <div class="absolute top-4 right-4">
       <Connection :connected="connected" />
     </div>
     <button
@@ -20,7 +20,7 @@ const connected = ref(false);
       @click="disconnect"
     >
       Disconnect
-    </button>
+    </button> -->
   
       <GameCreation @connected="connected = true"/>
  

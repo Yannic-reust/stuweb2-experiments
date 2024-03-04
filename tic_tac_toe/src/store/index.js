@@ -7,6 +7,7 @@ const store = createStore({
     userID: null,
     roomID: null,
     player: null,
+    waiting: true,
   },
   mutations: {
     setRoomID(state, payload) {
@@ -18,6 +19,10 @@ const store = createStore({
     setPlayer(state, payload) {
       state.player = payload;
     },
+    setWaiting(state, payload) {
+      state.waiting = payload;
+
+    },
   },
   actions: {
     updateRoom(context, uid) {
@@ -28,6 +33,9 @@ const store = createStore({
     },
     updatePlayer(context, id) {
       context.commit("setPlayer", id);
+    },
+    updateWaiting(context, bool) {
+      context.commit("setWaiting", bool);
     },
   },
 });
