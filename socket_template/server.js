@@ -11,6 +11,7 @@ let app = express();
 const server = createServer(app);
 
 const gameState = createGameState();
+const rooms = [];
 const connectedUsers = {};
 
 function createGameState() {
@@ -34,57 +35,76 @@ function updateGameState(index) {
 }
 
 // Enable CORS
-
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
     methods: ["GET", "POST"],
   },
   connectionStateRecovery: {
-    // the backup duration of the sessions and the packets
     maxDisconnectionDuration: 2 * 60 * 1000,
   },
 });
 
+io.engine.generateId = function (req) {
+    // generate a new custom id here
+    return 1
+}
+
+let firstTime = true;
+let roomID;
 // a client has connected
 io.on("connection", (socket) => {
-  console.log("a user connected", socket.id);
-  //console.log(socket);
-  // Check if user has an existing ID (rejoining)
-  if (
-    (socket.id = Object.keys(connectedUsers).find(
-      (key) => connectedUsers[key] === socket.id
-    ))
-  ) {
-    const playerId = socket.id;
-    console.log(`User ${playerId} reconnected`);
-    connectedUsers[playerId] = socket.id;
-    socket.emit("user_id_reconnect", { userId: playerId });
-  } else {
-    // Assign a new ID for a new user
-    const playerId = socket.id;
-    console.log(`User ${playerId} connected`);
-    connectedUsers[playerId] = socket.id;
-    // Send the new user their ID
-    socket.emit("user_id", { userId: playerId });
-  }
+  socket.on("join_room", (data) => {
+    console.log("user wants to join here", data);
+  });
+  
 
-  // Handle gameplay logic here...
 
-  // Store the player's ID in case of disconnection
+  socket.on("create_room", () => {
+    socket.join(socket.id);
+
+    socket.emit("connected", { connected: true, roomID: socket.id });
+    
+    console.log("room created", socket.id)
+
+    /* console.log("user", socket.id)
+      if (firstTime) {
+        roomID = socket.id;
+        socket.join(roomID);
+        firstTime = false;
+      }
+  
+      var currentRooms = io.sockets.adapter.rooms;  // Change variable name to currentRooms
+      console.log("rooms", currentRooms);
+  
+      console.log("room size:", currentRooms.get(roomID).size);
+      if (currentRooms.get(roomID).size >= 2) {
+        roomID = generateRoomId();
+        console.log("room created after check", roomID);
+      }
+      console.log("joining room", roomID)
+      socket.join(roomID);
+  
+      //console.log("roomID", roomID);
+      // console.log(`User ${socket.id} joined room ${roomID}`);
+  
+      socket.emit("connected", { connected: true, roomID: roomID });
+      // Additional logic for handling room joining
+      console.log("still this room", roomID)
+    });*/
+  });
+
+  // Handle user disconnection
   socket.on("disconnect", () => {
-    const playerId = Object.keys(connectedUsers).find(
-      (key) => connectedUsers[key] === socket.id
-    );
-    if (playerId) {
-      console.log(`User ${playerId} disconnected`);
-      // Additional logic for disconnect handling if needed
-    }
+    socket.leaveAll();
+    console.log("a user disconnected", socket.id);
+
+    // Additional logic for handling user disconnection
   });
 });
 
 // Additional function to generate a unique user ID
-function generateUserId() {
+function generateRoomId() {
   return Math.random().toString(36).substr(2, 9);
 }
 
