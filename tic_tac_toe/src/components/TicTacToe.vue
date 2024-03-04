@@ -56,11 +56,12 @@ onMounted(() => {
             :key="index"
             @click="sendInput(index)"
           >
-            <div v-if="item.player == '1'">
-              <p class="text-white text-h-md">X</p>
+            <div v-if="item.player == '1'"  class="flex justify-center items-center h-full">
+              <img src="../assets/icons/cross.svg" alt="circle" class="w-2/3"/>
             </div>
-            <div v-if="item.player == '2'">
-              <p class="text-white text-h-md">0</p>
+            <div v-if="item.player == '2'" class="flex justify-center items-center h-full">
+              <img src="../assets/icons/circle.svg" alt="circle" class="w-2/3"/>
+              
             </div>
           </div>
         </div>
