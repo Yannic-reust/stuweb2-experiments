@@ -3,38 +3,46 @@ import { io } from "socket.io-client";
 import { useStore } from "vuex";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import socket from '../socketService.js';
+import socket from "../socketService.js";
 
 const router = useRouter();
 
-
-
 const store = useStore();
 const name = ref("");
-
-
+const roomID = ref("");
 
 function createRoom() {
   console.log("Creating room");
- 
 
   socket.emit("create_room", name.value);
 
   socket.on("connected", (data) => {
+    if (store.state.player == null) {
+      store.dispatch("updateUser", data.userID);
+      store.dispatch("updateRoom", data.roomID);
+      store.dispatch("updatePlayer", data.player);
+      router.push(`/${data.roomID}`);
 
-    store.dispatch("updateUser", data.userID);
-    router.push(`/${data.roomID}`);
-
-    console.log(data);
+     
+    }
+    else{
+      console.log("other player joined",data);
+    }
   });
 }
-function joinRoom() {
-  socket = io("http://localhost:8080");
-  socket.emit("join_room", "id to join");
 
-  socket.on("connected", (data) => {
-    console.log("joined" + data);
-  });
+function joinRoom() {
+  console.log("joinRoom", roomID.value);
+  socket.emit("join_room", roomID.value);
+
+  if (store.state.player == null) {
+    socket.on("connected", (data) => {
+      store.dispatch("updateUser", data.userID);
+      store.dispatch("updateRoom", data.roomID);
+      store.dispatch("updatePlayer", data.player);
+      router.push(`/${data.roomID}`);
+    });
+  }
 }
 </script>
 
@@ -70,19 +78,23 @@ function joinRoom() {
           </form>
         </div>
         <div class="mt-2 flex w-1/2 pl-2 items-center flex-col">
-          <input
-            type="text"
-            name="room-id"
-            id="first-name"
-            placeholder="Enter Room ID"
-            className="block w-full h-10 font-roboto rounded-xl border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400  sm:text-sm sm:leading-6"
-          />
-          <button
-            class="bg-lightgrey/80 mt-2 w-full hover:bg-lightgrey font-roboto h-10 text-white font-bold py-2 px-8 rounded-xl"
-            @click="joinRoom()"
-          >
-            Join Room
-          </button>
+          <form @submit.prevent="joinRoom">
+            <input
+              type="text"
+              v-model="roomID"
+              name="name"
+              id="name"
+              placeholder="Name"
+              required
+              className="block w-full h-10 font-roboto rounded-xl border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400  sm:text-sm sm:leading-6"
+            />
+            <button
+              class="bg-lightgrey/80 hover:bg-lightgrey font-roboto text-white font-bold py-2 px-4 w-full mt-2 rounded-xl"
+              type="submit"
+            >
+              Join Room
+            </button>
+          </form>
         </div>
       </div>
     </div>
