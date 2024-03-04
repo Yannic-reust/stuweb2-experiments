@@ -10,7 +10,7 @@ const store = useStore();
 
 function sendInput(index) {
   console.log("wanting to sending input");
-  if (yourTurn.value) {
+  if (yourTurn.value && gameState.value[index].player === null) {
     console.log("sending input");
     socket.emit("input", { move: index, userID: store.state.userID, roomID: store.state.roomID, player: store.state.player});
   }
