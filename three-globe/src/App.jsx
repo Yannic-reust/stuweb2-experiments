@@ -23,23 +23,57 @@ acl.addEventListener('reading', handleReading);
 acl.start();*/
 
 
-let x;
+
+let x = 0;
 let y;
 
+const requestDeviceMotionPermission = () => {
+  if (typeof DeviceMotionEvent.requestPermission === 'function') {
+    DeviceMotionEvent.requestPermission()
+      .then((permissionState) => {
+        if (permissionState === 'granted') {
+          // Permission granted, add the event listener for device motion
+          window.addEventListener('devicemotion', handleDeviceMotion)
+        }
+      })
+      .catch(console.error)
+  } else {
+    // handle regular non iOS 13+ devices
+  }
+}
+
+const handleDeviceMotion = (event) => {
+  // Handle device motion data here
+  x = Math.round(event.acceleration.x * 1000) / 1000
+  y = Math.round(event.acceleration.y * 100) / 100
+  angularVelocity.x = x * 5
+console.log("x",x)
+//console.log("y",y)
+ 
+}
 
 
-function Ball({ floor }) {
+function Ball({ floor,x }) {
   console.log('creating ball')
+
+
+  
+
+
   const ref = useRef()
   const keyMap = useKeyboard()
-
+  
   const v0 = useMemo(() => new Vector3(), [])
   const q = useMemo(() => new Quaternion(), [])
   const angularVelocity = useMemo(() => new Vector3(), [])
 
+
+
+
+
   useFrame((_, delta) => {
     angularVelocity.x = x * 5
-    keyMap['KeyW'] && (angularVelocity.x -= delta * 5)
+    //keyMap['KeyW'] && (angularVelocity.x -= delta * 5)
     keyMap['KeyS'] && (angularVelocity.x += delta * 5)
     keyMap['KeyA'] && (angularVelocity.z += delta * 5)
     keyMap['KeyD'] && (angularVelocity.z -= delta * 5)
@@ -68,30 +102,7 @@ export default function App() {
 
   const ref = useRef()
 
-  const requestDeviceMotionPermission = () => {
-    if (typeof DeviceMotionEvent.requestPermission === 'function') {
-      DeviceMotionEvent.requestPermission()
-        .then((permissionState) => {
-          if (permissionState === 'granted') {
-            // Permission granted, add the event listener for device motion
-            window.addEventListener('devicemotion', handleDeviceMotion)
-          }
-        })
-        .catch(console.error)
-    } else {
-      // handle regular non iOS 13+ devices
-    }
-  }
-
-  const handleDeviceMotion = (event) => {
-    // Handle device motion data here
-    x = Math.round(event.acceleration.x * 1000) / 1000
-    y = Math.round(event.acceleration.y * 100) / 100
-   
-  console.log("x",x)
-  //console.log("y",y)
-   
-  }
+  
 
   return (
     <>
@@ -103,7 +114,7 @@ export default function App() {
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
       <gridHelper ref={ref} args={[100, 100]} />
-      <Ball floor={ref} />
+      <Ball floor={ref} x={x}/>
       {/* <Stats /> */}
     </Canvas>
     </>
