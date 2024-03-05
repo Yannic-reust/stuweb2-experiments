@@ -87,7 +87,7 @@ export default function App() {
   
   const handleDeviceMotion = (event) => {
     // Handle device motion data here
-    x = Math.round(event.acceleration.x * 1000) / 1000
+    x.current = Math.round(event.acceleration.x * 1000) / 1000
     y = Math.round(event.acceleration.y * 1000) / 1000
     
 
@@ -106,7 +106,7 @@ export default function App() {
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
       <gridHelper ref={ref} args={[100, 100]} />
-      <Ball floor={ref} x={x} y={y.current}/>
+      <Ball floor={ref} x={x.current} y={y.current}/>
       {/* <Stats /> */}
     </Canvas>
     </>
