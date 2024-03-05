@@ -104,7 +104,7 @@ export default function App() {
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
       <gridHelper ref={ref} args={[100, 100]} />
-      <Ball floor={ref} x={x} y={y}/>
+      <Ball floor={ref} x={x.current} y={y.current}/>
       {/* <Stats /> */}
     </Canvas>
     </>
