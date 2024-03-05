@@ -27,30 +27,7 @@ acl.start();*/
 let x = 0;
 let y;
 
-const requestDeviceMotionPermission = () => {
-  if (typeof DeviceMotionEvent.requestPermission === 'function') {
-    DeviceMotionEvent.requestPermission()
-      .then((permissionState) => {
-        if (permissionState === 'granted') {
-          // Permission granted, add the event listener for device motion
-          window.addEventListener('devicemotion', handleDeviceMotion)
-        }
-      })
-      .catch(console.error)
-  } else {
-    // handle regular non iOS 13+ devices
-  }
-}
 
-const handleDeviceMotion = (event) => {
-  // Handle device motion data here
-  x = Math.round(event.acceleration.x * 1000) / 1000
-  y = Math.round(event.acceleration.y * 100) / 100
-  angularVelocity.x = x * 5
-console.log("x",x)
-//console.log("y",y)
- 
-}
 
 
 function Ball({ floor,x }) {
@@ -102,7 +79,30 @@ function Ball({ floor,x }) {
 export default function App() {
 
   const ref = useRef()
-
+  const requestDeviceMotionPermission = () => {
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+      DeviceMotionEvent.requestPermission()
+        .then((permissionState) => {
+          if (permissionState === 'granted') {
+            // Permission granted, add the event listener for device motion
+            window.addEventListener('devicemotion', handleDeviceMotion)
+          }
+        })
+        .catch(console.error)
+    } else {
+      // handle regular non iOS 13+ devices
+    }
+  }
+  
+  const handleDeviceMotion = (event) => {
+    // Handle device motion data here
+    x = Math.round(event.acceleration.x * 1000) / 1000
+    y = Math.round(event.acceleration.y * 100) / 100
+    angularVelocity.x = x * 5
+  console.log("x",x)
+  //console.log("y",y)
+   
+  }
   
 
   return (
