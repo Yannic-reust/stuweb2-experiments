@@ -1,4 +1,4 @@
-import { useRef, useMemo,useEffect } from 'react'
+import { useRef, useMemo, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Stats } from '@react-three/drei'
 import useKeyboard from './useKeyboard'
@@ -22,6 +22,18 @@ import { Vector3, Quaternion } from 'three'
 acl.addEventListener('reading', handleReading);
 acl.start();*/
 
+
+let x;
+let y;
+const handleDeviceMotion = (event) => {
+  // Handle device motion data here
+  x =Math.round(event.acceleration.x * 100) / 100
+  y= Math.round(event.acceleration.y * 100) / 100
+
+console.log(x)
+console.log(y)
+ 
+}
 
 
 function Ball({ floor }) {
@@ -65,57 +77,38 @@ export default function App() {
   let z = useRef(0)
   const ref = useRef()
 
-
-
-
   const requestDeviceMotionPermission = () => {
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
       DeviceMotionEvent.requestPermission()
-        .then(permissionState => {
+        .then((permissionState) => {
           if (permissionState === 'granted') {
             // Permission granted, add the event listener for device motion
-            window.addEventListener("devicemotion", handleDeviceMotion);
+            window.addEventListener('devicemotion', handleDeviceMotion)
           }
         })
-        .catch(console.error);
+        .catch(console.error)
     } else {
       // handle regular non iOS 13+ devices
     }
-  };
-  
-  const handleDeviceMotion = (event) => {
-    // Handle device motion data here
-    x.current = Math.round(event.acceleration.x * 100) / 100;
-    y.current = Math.round(event.acceleration.y * 100) / 100;
-    z.current = Math.round(event.acceleration.z * 100) / 100;
-    
-   
-    console.log(`${x.current} m/s2`);
-    console.log(`${y.current} m/s2`);
-    console.log(`${z.current} m/s2`);
-  
-  };
-  
- 
-
-  
-  
-
+  }
 
  
-  return (<>
-<button onClick={requestDeviceMotionPermission} id="permissionButton">Request Device Motion Permission</button>
-<p  >x{x.current}</p>
-<p>y {y.current}</p>
-<p>z {z.current}</p>
-   {/* <Canvas
+
+  return (
+    <>
+      <button onClick={requestDeviceMotionPermission} id="permissionButton">
+        Request Device Motion Permission
+      </button>
+      <p>x{x.current}</p>
+      <p>y {y.current}</p>
+      <p>z {z.current}</p>
+      {/* <Canvas
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
       <gridHelper ref={ref} args={[100, 100]} />
       <Ball floor={ref} />
       <Stats />
     </Canvas> */}
-  </>
-   
+    </>
   )
 }
