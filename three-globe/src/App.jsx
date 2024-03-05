@@ -65,14 +65,29 @@ export default function App() {
   let z = useRef(0)
   const ref = useRef()
 
-  window.addEventListener("devicemotion", (event) => {
-    ref.current = ref.current + 1;
-   x = event.acceleration.x
-    y = event.acceleration.y
-    z = event.acceleration.z
-    console.log(`${event.acceleration.x} m/s2`);
-    console.log(`${event.acceleration.y} m/s2`);
-    console.log(`${event.acceleration.z} m/s2`);})
+
+
+
+  if (typeof DeviceMotionEvent.requestPermission === 'function') {
+    DeviceMotionEvent.requestPermission()
+      .then(permissionState => {
+        if (permissionState === 'granted') {
+          window.addEventListener("devicemotion", (event) => {
+            ref.current = ref.current + 1;
+           x = event.acceleration.x
+            y = event.acceleration.y
+            z = event.acceleration.z
+            console.log(`${event.acceleration.x} m/s2`);
+            console.log(`${event.acceleration.y} m/s2`);
+            console.log(`${event.acceleration.z} m/s2`);})
+        }
+      })
+      .catch(console.error);
+  } else {
+    // handle regular non iOS 13+ devices
+  }
+
+  
   
 
 
