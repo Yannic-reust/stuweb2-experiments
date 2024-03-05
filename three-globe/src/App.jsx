@@ -68,24 +68,32 @@ export default function App() {
 
 
 
-  if (typeof DeviceMotionEvent.requestPermission === 'function') {
-    DeviceMotionEvent.requestPermission()
-      .then(permissionState => {
-        if (permissionState === 'granted') {
-          window.addEventListener("devicemotion", (event) => {
-            ref.current = ref.current + 1;
-           x = event.acceleration.x
-            y = event.acceleration.y
-            z = event.acceleration.z
-            console.log(`${event.acceleration.x} m/s2`);
-            console.log(`${event.acceleration.y} m/s2`);
-            console.log(`${event.acceleration.z} m/s2`);})
-        }
-      })
-      .catch(console.error);
-  } else {
-    // handle regular non iOS 13+ devices
-  }
+  const requestDeviceMotionPermission = () => {
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+      DeviceMotionEvent.requestPermission()
+        .then(permissionState => {
+          if (permissionState === 'granted') {
+            // Permission granted, add the event listener for device motion
+            window.addEventListener("devicemotion", handleDeviceMotion);
+          }
+        })
+        .catch(console.error);
+    } else {
+      // handle regular non iOS 13+ devices
+    }
+  };
+  
+  const handleDeviceMotion = (event) => {
+    // Handle device motion data here
+    x = event.acceleration.x;
+    y = event.acceleration.y;
+    z = event.acceleration.z;
+    console.log(`${event.acceleration.x} m/s2`);
+    console.log(`${event.acceleration.y} m/s2`);
+    console.log(`${event.acceleration.z} m/s2`);
+  };
+  
+ 
 
   
   
@@ -93,7 +101,7 @@ export default function App() {
 
  
   return (<>
-
+<button onClick={requestDeviceMotionPermission} id="permissionButton">Request Device Motion Permission</button>
 <p  >x{x.current}</p>
 <p>y {y.current}</p>
 <p>z {z.current}</p>
