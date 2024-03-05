@@ -38,6 +38,7 @@ function Ball({ floor }) {
   const angularVelocity = useMemo(() => new Vector3(), [])
 
   useFrame((_, delta) => {
+    angularVelocity.x = x * 5
     keyMap['KeyW'] && (angularVelocity.x -= delta * 5)
     keyMap['KeyS'] && (angularVelocity.x += delta * 5)
     keyMap['KeyA'] && (angularVelocity.z += delta * 5)
@@ -84,10 +85,9 @@ export default function App() {
 
   const handleDeviceMotion = (event) => {
     // Handle device motion data here
-    x = Math.round(event.acceleration.x * 100) / 100
+    x = Math.round(event.acceleration.x * 1000) / 1000
     y = Math.round(event.acceleration.y * 100) / 100
-    console.log("input",event.acceleration.x)
-    console.log("rounded",Math.round(event.acceleration.x * 100) / 100)
+   
   console.log("x",x)
   //console.log("y",y)
    
@@ -98,14 +98,14 @@ export default function App() {
       <button onClick={requestDeviceMotionPermission} id="permissionButton">
         Request Device Motion Permission
       </button>
-     <p>Version 1</p>
-      {/* <Canvas
+     <p >Version 2</p>
+      <Canvas
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
       <gridHelper ref={ref} args={[100, 100]} />
       <Ball floor={ref} />
-      <Stats />
-    </Canvas> */}
+      {/* <Stats /> */}
+    </Canvas>
     </>
   )
 }
