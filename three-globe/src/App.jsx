@@ -10,7 +10,7 @@ const acl = new Accelerometer({ frequency: 60 });
   console.log("Acceleration along the X-axis " + acl.x);
   console.log("Acceleration along the Y-axis " + acl.y);
   console.log("Acceleration along the Z-axis " + acl.z);
-  
+
 };
 
 acl.addEventListener('reading', handleReading);
@@ -55,13 +55,16 @@ function Ball({ floor }) {
 
 export default function App() {
   const ref = useRef()
-  return (
-    <Canvas
+  return (<>
+  <p>asd</p>
+   <Canvas
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
       <gridHelper ref={ref} args={[100, 100]} />
       <Ball floor={ref} />
       <Stats />
     </Canvas>
+  </>
+   
   )
 }
