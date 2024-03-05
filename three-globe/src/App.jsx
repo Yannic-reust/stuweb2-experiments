@@ -4,7 +4,7 @@ import { Stats } from '@react-three/drei'
 import useKeyboard from './useKeyboard'
 import { Vector3, Quaternion } from 'three'
 
-useEffect(() => {
+/*useEffect(() => {
   const acl = new Accelerometer({ frequency: 60 });
 
   const handleReading = () => {
@@ -22,7 +22,7 @@ useEffect(() => {
     acl.stop();
   };
 }, []);
-
+*/
 
 function Ball({ floor }) {
   console.log('creating ball')
