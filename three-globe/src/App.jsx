@@ -66,7 +66,7 @@ export default function App() {
 
   const ref = useRef()
 
-  const x = useRef<Number | null>(0);
+  let x = useRef(0)
   let y = useRef()
   
 
@@ -95,18 +95,20 @@ export default function App() {
    
   }
   
+  
 
   return (
     <>
       <button onClick={requestDeviceMotionPermission} id="permissionButton">
        Move Ball
       </button>
+     
      <p >Version 2</p>
       <Canvas
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
       <gridHelper ref={ref} args={[100, 100]} />
-      <Ball floor={ref} x={x.current} y={y.current}/>
+      <Ball floor={ref} x={x} y={y.current}/>
       {/* <Stats /> */}
     </Canvas>
     </>
