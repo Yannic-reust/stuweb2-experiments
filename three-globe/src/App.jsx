@@ -37,10 +37,10 @@ function Ball({ floor,x,y }) {
 
    
     //angularVelocity.x += delta * 5
-   angularVelocity.x += x.current 
+   angularVelocity.x += y.current 
  
    console.log("angularVelocity",angularVelocity.x)
-   angularVelocity.z += y.current 
+   angularVelocity.z += x.current 
   
    console.log("angularVelocity",angularVelocity.y)
    /* keyMap['KeyS'] && (angularVelocity.x += delta * 5)
