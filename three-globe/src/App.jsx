@@ -86,7 +86,7 @@ export default function App() {
   
   const handleDeviceMotion = (event) => {
     // Handle device motion data here
-    x = Math.round(event.acceleration.x * 1000) / 1000
+    x.current = Math.round(event.acceleration.x * 1000) / 1000
     y = Math.round(event.acceleration.y * 1000) / 1000
     
 
