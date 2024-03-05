@@ -4,8 +4,16 @@ body,
   height: 100%;
   margin: 0;
   background: #000000;
+  position: relative;
 }
 
 p{
   color: aliceblue;
+}
+button{
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
 }
