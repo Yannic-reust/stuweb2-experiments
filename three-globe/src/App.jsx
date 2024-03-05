@@ -64,7 +64,7 @@ function Ball({ floor,x,y }) {
 export default function App() {
 
   const ref = useRef()
-  let x = useRef()
+  let x = useRef(0)
   let y = useRef()
   
 
