@@ -34,7 +34,8 @@ function Ball({ floor,x,y }) {
 
 
   useFrame((_, delta) => {
-    //console.log("x",x)
+
+    console.log("x",x)
     //angularVelocity.x = x * 5
     keyMap['KeyW'] && (angularVelocity.x -= delta * 5)
     keyMap['KeyS'] && (angularVelocity.x += delta * 5)
@@ -89,7 +90,7 @@ export default function App() {
     y = Math.round(event.acceleration.y * 1000) / 1000
     
 
-  console.log("x",x)
+  //console.log("x",x)
    
   }
   
