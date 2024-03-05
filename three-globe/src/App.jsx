@@ -4,7 +4,7 @@ import { Stats } from '@react-three/drei'
 import useKeyboard from './useKeyboard'
 import { Vector3, Quaternion } from 'three'
 
-const acl = new Accelerometer({ frequency: 60 });
+/*const acl = new Accelerometer({ frequency: 60 });
  
  const handleReading = () => {
   console.log("Acceleration along the X-axis " + acl.x);
@@ -14,7 +14,7 @@ const acl = new Accelerometer({ frequency: 60 });
 };
 
 acl.addEventListener('reading', handleReading);
-acl.start();
+acl.start();*/
 
 
 
@@ -56,7 +56,7 @@ function Ball({ floor }) {
 export default function App() {
   const ref = useRef()
   return (<>
-  <p>asd</p>
+
    <Canvas
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
