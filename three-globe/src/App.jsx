@@ -25,15 +25,7 @@ acl.start();*/
 
 let x;
 let y;
-const handleDeviceMotion = (event) => {
-  // Handle device motion data here
-  x =Math.round(event.acceleration.x * 100) / 100
-  y= Math.round(event.acceleration.y * 100) / 100
 
-console.log(x)
-console.log(y)
- 
-}
 
 
 function Ball({ floor }) {
@@ -72,9 +64,7 @@ function Ball({ floor }) {
 }
 
 export default function App() {
-  let x = useRef(0)
-  let y = useRef(0)
-  let z = useRef(0)
+
   const ref = useRef()
 
   const requestDeviceMotionPermission = () => {
@@ -92,16 +82,22 @@ export default function App() {
     }
   }
 
- 
+  const handleDeviceMotion = (event) => {
+    // Handle device motion data here
+    x =Math.round(event.acceleration.x * 100) / 100
+    y= Math.round(event.acceleration.y * 100) / 100
+  
+  console.log(x)
+  console.log(y)
+   
+  }
 
   return (
     <>
       <button onClick={requestDeviceMotionPermission} id="permissionButton">
         Request Device Motion Permission
       </button>
-      <p>x{x.current}</p>
-      <p>y {y.current}</p>
-      <p>z {z.current}</p>
+     
       {/* <Canvas
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
