@@ -15,7 +15,7 @@ import { Vector3, Quaternion } from 'three'
 
 function Ball({ floor,x,y }) {
 
-  let xNew = useRef(x)
+
   console.log('creating ball')
   console.log("x in ball",x)
 
@@ -65,7 +65,7 @@ function Ball({ floor,x,y }) {
 export default function App() {
 
   const ref = useRef()
-  let x = useRef(0)
+  const x = useRef(0)
   let y = useRef()
   
 
@@ -105,7 +105,7 @@ export default function App() {
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
       <gridHelper ref={ref} args={[100, 100]} />
-      <Ball floor={ref} x={x} y={y.current}/>
+      <Ball floor={ref} x={x.current} y={y.current}/>
       {/* <Stats /> */}
     </Canvas>
     </>
