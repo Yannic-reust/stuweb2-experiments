@@ -19,10 +19,10 @@ function Ball({ floor, x, y }) {
     angularVelocity.x += y.current
     
 
-    console.log('angularVelocity y', angularVelocity.x)
+   // console.log('angularVelocity y', angularVelocity.x)
     angularVelocity.z += x.current
 
-    console.log('angularVelocity x', angularVelocity.y)
+    //console.log('angularVelocity x', angularVelocity.y)
     /* keyMap['KeyS'] && (angularVelocity.x += delta * 5)
     keyMap['KeyA'] && (angularVelocity.z += delta * 5)
     keyMap['KeyD'] && (angularVelocity.z -= delta * 5)*/
@@ -70,8 +70,8 @@ export default function App() {
 
   const handleDeviceMotion = (event) => {
     // Handle device motion data here
-    x.current = Math.round(event.acceleration.x) * 0.5
-    y.current = Math.round(event.acceleration.y) * 0.5
+    x.current = event.acceleration.x* 0.5
+    y.current = event.acceleration.y * 0.5
     console.log("x",x.current)
     console.log("y",y.current)
     //console.log("x",x)
