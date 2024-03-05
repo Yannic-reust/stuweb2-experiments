@@ -64,7 +64,7 @@ function Ball({ floor }) {
 }
 
 export default function App() {
-console.log("version 1")
+
   const ref = useRef()
 
   const requestDeviceMotionPermission = () => {
@@ -98,7 +98,7 @@ console.log("version 1")
       <button onClick={requestDeviceMotionPermission} id="permissionButton">
         Request Device Motion Permission
       </button>
-     
+     <p>Version 1</p>
       {/* <Canvas
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
