@@ -4,23 +4,7 @@ import { Stats } from '@react-three/drei'
 import useKeyboard from './useKeyboard'
 import { Vector3, Quaternion } from 'three'
 
-/*window.addEventListener("devicemotion", (event) => {
-  console.log(`${event.acceleration.x} m/s2`);
-  console.log(`${event.acceleration.y} m/s2`);
-  console.log(`${event.acceleration.z} m/s2`);
-});*/
 
-/*const acl = new Accelerometer({ frequency: 60 });
- 
- const handleReading = () => {
-  console.log("Acceleration along the X-axis " + acl.x);
-  console.log("Acceleration along the Y-axis " + acl.y);
-  console.log("Acceleration along the Z-axis " + acl.z);
-
-};
-
-acl.addEventListener('reading', handleReading);
-acl.start();*/
 
 
 
@@ -102,10 +86,10 @@ export default function App() {
   const handleDeviceMotion = (event) => {
     // Handle device motion data here
     x = Math.round(event.acceleration.x * 1000) / 1000
-    y = Math.round(event.acceleration.y * 100) / 100
+    y = Math.round(event.acceleration.y * 1000) / 1000
     
 
-  //console.log("y",y)
+  console.log("x",x)
    
   }
   
