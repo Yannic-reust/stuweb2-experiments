@@ -29,9 +29,11 @@ acl.start();*/
 
 
 
-function Ball({ floor,x }) {
+function Ball({ floor,x,y }) {
+
+  let xNew = useRef(x)
   console.log('creating ball')
-  console.log("x in ball",x)
+  console.log("x in ball",xNew)
 
   
 
@@ -79,7 +81,8 @@ export default function App() {
 
   const ref = useRef()
   let x = useRef()
-  let y;
+  let y = useRef()
+  
 
   const requestDeviceMotionPermission = () => {
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
@@ -117,7 +120,7 @@ export default function App() {
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
       <gridHelper ref={ref} args={[100, 100]} />
-      <Ball floor={ref} x={x}/>
+      <Ball floor={ref} x={x} y={y}/>
       {/* <Stats /> */}
     </Canvas>
     </>
