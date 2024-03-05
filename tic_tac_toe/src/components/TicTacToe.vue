@@ -5,15 +5,12 @@ import socket from "../socketService.js";
 import ShareGame from "./ShareGame.vue";
 import { useRoute } from "vue-router";
 
-
-const gameState = ref([]);
+const gameState = ref(["", "", "", "", "", "", "", "", ""]);
 const yourTurn = ref(true);
 
 const store = useStore();
 const route = useRoute();
 const link = route.fullPath.slice(1);
-
-
 
 function sendInput(index) {
   console.log("wanting to sending input");
@@ -49,8 +46,8 @@ onMounted(() => {
 
 <template>
   <div class="w-full h-full flex justify-center items-center">
-    <div class="h-min ">
-      <div class="bg-lightgrey h-min p-8 rounded-3xl ">
+    <div class="h-min">
+      <div class="bg-lightgrey h-min p-8 rounded-3xl">
         <h1
           class="font-roboto text-center bg-gradient-to-r from-orange to-pink bg-clip-text text-h-md"
           style="color: transparent"
@@ -62,7 +59,10 @@ onMounted(() => {
         <ShareGame :link="link" />
       </div>
       <div class="flex">
-        <div class="grid gap-4 grid-rows-3 mt-4 grid-cols-3" v-if="!store.state.waiting">
+        <div
+          class="grid gap-4 grid-rows-3 mt-4 grid-cols-3"
+          v-if="!store.state.waiting"
+        >
           <div
             class="bg-lightgrey h-24 w-24 rounded-3xl cursor-pointer"
             v-for="(item, index) in gameState"
@@ -88,10 +88,7 @@ onMounted(() => {
           </div>
         </div>
       </div>
-     
     </div>
   </div>
 </template>
-<style>
-
-</style>
+<style></style>

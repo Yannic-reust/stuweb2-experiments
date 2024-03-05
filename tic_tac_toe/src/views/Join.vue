@@ -42,7 +42,9 @@ onBeforeMount(() => {
       store.dispatch("updateRoom", data.roomID);
       store.dispatch("updatePlayer", data.player);
       store.dispatch("updateWaiting", false);
+     
       router.push(`/${data.roomID}`);
+     
     });
   }
 });
