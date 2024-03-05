@@ -38,10 +38,11 @@ function Ball({ floor,x,y }) {
     console.log("x",x);
     console.log(keyMap['KeyW']);
     //angularVelocity.x += delta * 5
-   true && (angularVelocity.x -= delta * x.current *5)
-    keyMap['KeyS'] && (angularVelocity.x += delta * 5)
+   angularVelocity.x = delta * x.current *6
+   angularVelocity.y = delta * y.current *6
+   /* keyMap['KeyS'] && (angularVelocity.x += delta * 5)
     keyMap['KeyA'] && (angularVelocity.z += delta * 5)
-    keyMap['KeyD'] && (angularVelocity.z -= delta * 5)
+    keyMap['KeyD'] && (angularVelocity.z -= delta * 5)*/
 
     q.setFromAxisAngle(angularVelocity, delta).normalize()
     ref.current.applyQuaternion(q)
@@ -68,7 +69,7 @@ export default function App() {
   const ref = useRef()
 
   let x = useRef(0)
-  let y = useRef()
+  let y = useRef(0)
   
 
   const requestDeviceMotionPermission = () => {
@@ -109,7 +110,7 @@ export default function App() {
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
       <gridHelper ref={ref} args={[100, 100]} />
-      <Ball floor={ref} x={x} y={y.current}/>
+      <Ball floor={ref} x={x} y={y}/>
       {/* <Stats /> */}
     </Canvas>
     </>
