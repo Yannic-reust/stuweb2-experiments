@@ -4,25 +4,19 @@ import { Stats } from '@react-three/drei'
 import useKeyboard from './useKeyboard'
 import { Vector3, Quaternion } from 'three'
 
-/*useEffect(() => {
-  const acl = new Accelerometer({ frequency: 60 });
+const acl = new Accelerometer({ frequency: 60 });
+ 
+ const handleReading = () => {
+  console.log("Acceleration along the X-axis " + acl.x);
+  console.log("Acceleration along the Y-axis " + acl.y);
+  console.log("Acceleration along the Z-axis " + acl.z);
+  
+};
 
-  const handleReading = () => {
-    console.log("Acceleration along the X-axis " + acl.x);
-    console.log("Acceleration along the Y-axis " + acl.y);
-    console.log("Acceleration along the Z-axis " + acl.z);
-  };
+acl.addEventListener('reading', handleReading);
+acl.start();
 
-  acl.addEventListener('reading', handleReading);
-  acl.start();
 
-  // Cleanup when component unmounts
-  return () => {
-    acl.removeEventListener('reading', handleReading);
-    acl.stop();
-  };
-}, []);
-*/
 
 function Ball({ floor }) {
   console.log('creating ball')
