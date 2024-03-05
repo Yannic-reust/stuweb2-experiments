@@ -4,6 +4,12 @@ import { Stats } from '@react-three/drei'
 import useKeyboard from './useKeyboard'
 import { Vector3, Quaternion } from 'three'
 
+window.addEventListener("devicemotion", (event) => {
+  console.log(`${event.acceleration.x} m/s2`);
+  console.log(`${event.acceleration.y} m/s2`);
+  console.log(`${event.acceleration.z} m/s2`);
+});
+
 /*const acl = new Accelerometer({ frequency: 60 });
  
  const handleReading = () => {
