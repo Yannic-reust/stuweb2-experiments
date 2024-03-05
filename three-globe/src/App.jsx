@@ -17,11 +17,12 @@ function Ball({ floor, x, y }) {
   useFrame((_, delta) => {
     //angularVelocity.x += delta * 5
     angularVelocity.x += y.current
+    
 
     console.log('angularVelocity', angularVelocity.x)
     angularVelocity.z += x.current
 
-    console.log('angularVelocity', angularVelocity.y)
+   // console.log('angularVelocity', angularVelocity.y)
     /* keyMap['KeyS'] && (angularVelocity.x += delta * 5)
     keyMap['KeyA'] && (angularVelocity.z += delta * 5)
     keyMap['KeyD'] && (angularVelocity.z -= delta * 5)*/
@@ -31,7 +32,7 @@ function Ball({ floor, x, y }) {
 
     angularVelocity.lerp(v0, 0.01) // slow down the roll
 
-    floor.current.position.x += angularVelocity.z * delta
+    floor.current.position.x -= angularVelocity.z * delta
     floor.current.position.z -= angularVelocity.x * delta
 
     floor.current.position.x = floor.current.position.x % 10
