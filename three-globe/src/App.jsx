@@ -54,6 +54,7 @@ export default function App() {
   let y = useRef(0)
 
   const requestDeviceMotionPermission = () => {
+    console.log('requesting device motion permission')
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
       DeviceMotionEvent.requestPermission()
         .then((permissionState) => {
