@@ -78,7 +78,7 @@ function Ball({ floor,x }) {
 export default function App() {
 
   const ref = useRef()
-  const x = useRef()
+  let x = useRef()
   let y;
 
   const requestDeviceMotionPermission = () => {
