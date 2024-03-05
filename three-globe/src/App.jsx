@@ -4,11 +4,11 @@ import { Stats } from '@react-three/drei'
 import useKeyboard from './useKeyboard'
 import { Vector3, Quaternion } from 'three'
 
-window.addEventListener("devicemotion", (event) => {
+/*window.addEventListener("devicemotion", (event) => {
   console.log(`${event.acceleration.x} m/s2`);
   console.log(`${event.acceleration.y} m/s2`);
   console.log(`${event.acceleration.z} m/s2`);
-});
+});*/
 
 /*const acl = new Accelerometer({ frequency: 60 });
  
@@ -60,16 +60,35 @@ function Ball({ floor }) {
 }
 
 export default function App() {
+  let x = useRef(0)
+  let y = useRef(0)
+  let z = useRef(0)
   const ref = useRef()
+
+  window.addEventListener("devicemotion", (event) => {
+    ref.current = ref.current + 1;
+   x = event.acceleration.x
+    y = event.acceleration.y
+    z = event.acceleration.z
+    console.log(`${event.acceleration.x} m/s2`);
+    console.log(`${event.acceleration.y} m/s2`);
+    console.log(`${event.acceleration.z} m/s2`);})
+  
+
+
+ 
   return (<>
 
-   <Canvas
+<p  >x{x.current}</p>
+<p>y {y.current}</p>
+<p>z {z.current}</p>
+   {/* <Canvas
       camera={{ position: [0, 2.5, 2.5] }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}>
       <gridHelper ref={ref} args={[100, 100]} />
       <Ball floor={ref} />
       <Stats />
-    </Canvas>
+    </Canvas> */}
   </>
    
   )
