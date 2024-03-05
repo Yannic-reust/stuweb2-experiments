@@ -24,8 +24,7 @@ acl.start();*/
 
 
 
-let x = 0;
-let y;
+
 
 
 
@@ -49,9 +48,9 @@ function Ball({ floor,x }) {
 
 
   useFrame((_, delta) => {
-    console.log("x",x)
+    //console.log("x",x)
     //angularVelocity.x = x * 5
-    //keyMap['KeyW'] && (angularVelocity.x -= delta * 5)
+    keyMap['KeyW'] && (angularVelocity.x -= delta * 5)
     keyMap['KeyS'] && (angularVelocity.x += delta * 5)
     keyMap['KeyA'] && (angularVelocity.z += delta * 5)
     keyMap['KeyD'] && (angularVelocity.z -= delta * 5)
@@ -79,6 +78,9 @@ function Ball({ floor,x }) {
 export default function App() {
 
   const ref = useRef()
+  const x = useRef()
+  let y;
+
   const requestDeviceMotionPermission = () => {
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
       DeviceMotionEvent.requestPermission()
@@ -98,7 +100,7 @@ export default function App() {
     // Handle device motion data here
     x = Math.round(event.acceleration.x * 1000) / 1000
     y = Math.round(event.acceleration.y * 100) / 100
-    angularVelocity.x = x * 5
+    
   console.log("x",x)
   //console.log("y",y)
    
