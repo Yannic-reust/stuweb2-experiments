@@ -54,7 +54,7 @@ export default function App() {
   let y = useRef(0)
 
   const requestDeviceMotionPermission = () => {
-    console.log('requesting device motion permission')
+   
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
       DeviceMotionEvent.requestPermission()
         .then((permissionState) => {
@@ -73,8 +73,8 @@ export default function App() {
     // Handle device motion data here
     x.current = event.acceleration.x* 0.1
     y.current = event.acceleration.y * 0.1
-    console.log("x",x.current)
-    console.log("y",y.current)
+    //console.log("x",x.current)
+    //console.log("y",y.current)
     //console.log("x",x)
   }
 
