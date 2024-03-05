@@ -64,7 +64,7 @@ function Ball({ floor }) {
 }
 
 export default function App() {
-
+console.log("version 1")
   const ref = useRef()
 
   const requestDeviceMotionPermission = () => {
