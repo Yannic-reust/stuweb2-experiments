@@ -31,7 +31,7 @@ acl.start();*/
 
 function Ball({ floor,x }) {
   console.log('creating ball')
-
+  console.log("x in ball",x)
 
   
 
@@ -101,7 +101,7 @@ export default function App() {
     x = Math.round(event.acceleration.x * 1000) / 1000
     y = Math.round(event.acceleration.y * 100) / 100
     
-  console.log("x",x)
+
   //console.log("y",y)
    
   }
@@ -110,7 +110,7 @@ export default function App() {
   return (
     <>
       <button onClick={requestDeviceMotionPermission} id="permissionButton">
-        Request Device Motion Permission
+       Move Ball
       </button>
      <p >Version 2</p>
       <Canvas
