@@ -5,6 +5,14 @@ import socket from "../socketService.js";
 import ShareGame from "./ShareGame.vue";
 import { useRoute } from "vue-router";
 
+import WinnerModal from "../components/WinnerModal.vue";
+import LoserModal from "../components/LoserModal.vue";
+import NotYourTurn from "../components/NotYourTurn.vue";
+
+const winner = ref(false);
+const loser = ref(false);
+const notYourTurn = ref(false);
+
 const gameState = ref(["", "", "", "", "", "", "", "", ""]);
 const yourTurn = ref(true);
 
@@ -27,11 +35,26 @@ function sendInput(index) {
       player: store.state.player,
     });
   }
+  else{
+    notYourTurn.value = true;
+    setTimeout(() => {
+      notYourTurn.value = false;
+    }, 3000);
+  }
 }
 
 onMounted(() => {
   socket.on("game_state", (data) => {
     gameState.value = data;
+  });
+  socket.on("game_over", (data) => {
+    
+    if (data.winner === store.state.player) {
+      winner.value = true;
+    } else {
+      loser.value = true;
+    }
+    
   });
 
   /*socket.on("room_full", () => {
@@ -46,6 +69,9 @@ onMounted(() => {
 
 <template>
   <div class="w-full h-full flex justify-center items-center">
+    <WinnerModal :open="winner" @close="winner = false" />
+    <LoserModal :open="loser" @close="loser = false" />
+
     <div class="h-min">
       <div class="bg-lightgrey h-min p-8 rounded-3xl">
         <h1
@@ -88,6 +114,7 @@ onMounted(() => {
           </div>
         </div>
       </div>
+      <NotYourTurn :open="notYourTurn" />
     </div>
   </div>
 </template>

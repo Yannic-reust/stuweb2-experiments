@@ -5,6 +5,14 @@ import socket from "../socketService.js";
 
 import { useRoute, useRouter } from "vue-router";
 
+import WinnerModal from "../components/WinnerModal.vue";
+import LoserModal from "../components/LoserModal.vue";
+import NotYourTurn from "../components/NotYourTurn.vue";
+
+const winner = ref(false);
+const loser = ref(false);
+const notYourTurn = ref(false);
+
 const gameState = ref([]);
 const yourTurn = ref(true);
 
@@ -27,13 +35,18 @@ function sendInput(index) {
       player: store.state.player,
     });
   }
+  else{
+    notYourTurn.value = true;
+    setTimeout(() => {
+      notYourTurn.value = false;
+    }, 3000);
+  }
 }
 
 onBeforeMount(() => {
   const parts = route.fullPath.split("/");
   const url = parts[parts.length - 1];
 
- 
   socket.emit("join_room", url);
 
   if (store.state.player == null) {
@@ -42,9 +55,8 @@ onBeforeMount(() => {
       store.dispatch("updateRoom", data.roomID);
       store.dispatch("updatePlayer", data.player);
       store.dispatch("updateWaiting", false);
-     
+
       router.push(`/${data.roomID}`);
-     
     });
   }
 });
@@ -53,7 +65,13 @@ onMounted(() => {
   socket.on("game_state", (data) => {
     gameState.value = data;
   });
-
+  socket.on("game_over", (data) => {
+    if (data.winner === store.state.player) {
+      winner.value = true;
+    } else {
+      loser.value = true;
+    }
+  });
   socket.on("turn", (data) => {
     yourTurn.value = data === store.state.player;
   });
@@ -61,7 +79,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full h-full flex justify-center items-center">
+  <div class="w-full h-full flex justify-center items-center relative">
+    <WinnerModal :open="winner" @close="winner = false" />
+    <LoserModal :open="loser" @close="loser = false" />
+
     <div class="h-min">
       <div class="bg-lightgrey h-min p-8 rounded-3xl">
         <h1
@@ -105,6 +126,7 @@ onMounted(() => {
           <p>There is no game running</p>
         </div>
       </div>
+      <NotYourTurn :open="notYourTurn" />
     </div>
   </div>
 </template>
