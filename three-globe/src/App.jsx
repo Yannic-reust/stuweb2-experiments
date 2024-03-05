@@ -52,8 +52,8 @@ function Ball({ floor,x,y }) {
 
     angularVelocity.lerp(v0, 0.01) // slow down the roll
 
-    floor.current.position.x += angularVelocity.x * delta
-    floor.current.position.z -= angularVelocity.z * delta
+    floor.current.position.x += angularVelocity.z * delta
+    floor.current.position.z -= angularVelocity.x * delta
 
     floor.current.position.x = floor.current.position.x % 10
     floor.current.position.z = floor.current.position.z % 10
