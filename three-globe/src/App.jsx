@@ -17,7 +17,7 @@ function Ball({ floor,x,y }) {
 
   let xNew = useRef(x)
   console.log('creating ball')
-  console.log("x in ball",xNew)
+  console.log("x in ball",x)
 
   
 
