@@ -35,11 +35,14 @@ function Ball({ floor,x,y }) {
 
   useFrame((_, delta) => {
 
-    console.log("x",x);
-    console.log(keyMap['KeyW']);
+   
     //angularVelocity.x += delta * 5
-   angularVelocity.x = delta * x.current *6
-   angularVelocity.y = delta * y.current *6
+   angularVelocity.x == delta * x.current * 6
+   console.log("x",x.current)
+   console.log("angularVelocity",angularVelocity.x)
+   angularVelocity.y == delta * y.current *6
+   console.log("y",y.current)
+   console.log("angularVelocity",angularVelocity.y)
    /* keyMap['KeyS'] && (angularVelocity.x += delta * 5)
     keyMap['KeyA'] && (angularVelocity.z += delta * 5)
     keyMap['KeyD'] && (angularVelocity.z -= delta * 5)*/
